@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');</style>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav id="Principal">
+        <div id="menu">
+            <div id="Descricao-Primaria">DncWeather</div>
+            <div class="Descricao-Segundaria">Endereços</div>
+            <div class="Descricao-Segundaria">Previsão do tempo</div>
+        </div>
+    </nav>
+
+    <section>
+        <header>
+            <div id= "Texto-Icone">
+                <div id="Descricao-Principal-Icone">
+                Descubra Mais com Precisão: <br> Previsões do Tempo e endereços <br> em tempo real.
+                </div>
+
+                <div  id="Icone-Nuvem">
+                <img src="Icones/nuvens.svg" alt="">
+                </div>
+            </div>
+        </header>
+
+        <form id="Formulario">
+            <div id="retangulo">
+                <div class="Grupo-Formulario">
+                    <label for="primeiro-nome">Nome:</label>
+                    <input type="text" placeholder="Insira seu primeiro nome:"required>
+                </div>
+
+                <div class="Grupo-Formulario">    
+                    <label>E-mail:</label>
+                    <input type="email" placeholder="Insira seu e-mail"required>
+                </div>    
+
+                <div class="Grupo-Formulario">
+                    <label>Digite o CEP:</label>
+                    <input id="inputCep" type="text" placeholder="Insira o CEP"require>
+                </div>
+                
+                <div class="Grupo-Formulario">
+                    <label id="Latitude-Previsao">Digite a latitude e longitude para saber a previsão:</label>
+                    <div id="Box">
+                        <input id="inputLatitude" type="text" placeholder="Insira a latitude" required>
+                        <input id="inputLongitude" type="text" placeholder="Insira a longitude" required>
+                    </div>
+                    
+                </div>
+                    
+
+                <button  type="button" onclick="getAddressByCep()">Acessar</button>
+                
+            </div>    
+        </form>
+
+        <div id="Buscas">
+            <h2>Resultado da busca por CEP:</h2>
+            <img id="Alfinete" src="Icones/alfinete.svg" alt="">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Logradouro/Nome</th>
+                    <th>Bairro/Distrito</th>
+                    <th>Localidade/UF</th>
+                </tr>
+            </thead>
+            <tbody class="Result">
+                <tr>
+                    <td><input id="cep" type="text" value="" readonly /></td>
+                    <td><input id="bairro" type="text" value="" readonly /></td>
+                    <td><input id="cidade" type="text" value="" readonly /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="Clima-Container">
+            <div class="Clima-Previsao">
+              <h1>Previsão do tempo na região:</h1>
+              <img src="Icones/nuvens2.svg" alt="Nuvens" id="Nuvem-icon">
+            </div>
+            <div class="Clima-info">
+              <input id="clima" type="text" value="">
+            </div>
+        </div>
+
+    </section>
+    
+    
+    <div id="Temos-Politica">
+        <p>Termos de Uso | Política de Privacidade</p>
+    </div>
+</body>
+
+<script src="index.js"></script>
+</html>
