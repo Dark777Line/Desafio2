@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Obtém a previsão do tempo
         await getWeatherByCoordinates();
+
+        // Envia os dados para o Google Sheets
+        await sendDataToGoogleSheets();
     });
 });
 
@@ -52,7 +55,7 @@ function validateEmail(email) {
 
 async function getAddressByCep() {
     const cep = document.getElementById('inputCep').value.trim();
-    
+
     if (!cep || cep.length !== 8 || isNaN(cep)) {
         alert('Por favor, insira um CEP válido com 8 dígitos.');
         return;
@@ -104,10 +107,41 @@ async function getWeatherByCoordinates() {
         const humidity = data.hourly.relative_humidity_2m[0]; // Primeira previsão de umidade relativa
 
         document.getElementById('clima').value = `Temperatura: ${temperature}°C, Umidade: ${humidity}%`;
-        
+
     } catch (error) {
         console.error('Erro ao consumir a API de clima:', error);
         alert('Erro ao buscar a previsão do tempo. Tente novamente mais tarde.');
+    }
+}
+
+async function sendDataToGoogleSheets() {
+    let nome = document.getElementById("nome").value;
+    let email = document.getElementById("email").value;
+    let cep = document.getElementById("inputCep").value;
+    let latitude = document.getElementById("inputLatitude").value;
+    let longitude = document.getElementById("inputLongitude").value;
+
+    // Substitua pela URL do Web App do Google Apps Script
+    let scriptURL = "https://docs.google.com/spreadsheets/d/14SYPejGZ9O7Af9HxhUXml3P0TEPdg2L-ujYdtDImxVk/edit?usp=sharing";
+
+    let data = { nome, email, cep, latitude, longitude };
+
+    try {
+        const response = await fetch(scriptURL, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) throw new Error("Erro ao enviar os dados.");
+
+        const result = await response.text();
+        alert("Dados enviados com sucesso!");
+
+        document.getElementById("Formulario").reset();
+    } catch (error) {
+        console.error("Erro ao enviar os dados:", error);
+        alert("Erro ao enviar os dados para o Google Sheets. Tente novamente.");
     }
 }
 
@@ -124,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (targetElement) {
                 const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY;
-                
+
                 // Animação de rolagem suave
                 window.scrollTo({
                     top: offsetTop - 50, // Ajuste para evitar sobreposição com cabeçalhos fixos
@@ -133,31 +167,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-});
-
-document.getElementById("Formulario").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita recarregar a página
-
-    let nome = document.getElementById("nome").value;
-    let email = document.getElementById("email").value;
-    let cep = document.getElementById("inputCep").value;
-    let latitude = document.getElementById("inputLatitude").value;
-    let longitude = document.getElementById("inputLongitude").value;
-
-    // URL do Google Apps Script (Cole a URL que você copiou aqui)
-    let scriptURL = "https://script.google.com/macros/s/AKfycbxksKNEPVIanWlbkCqXok7L9g-1ALGrzD9ICzcyiQ6Sg0pkaJROu6E6YYv_8eJt-LA/exec";
-
-    let data = { nome, email, cep, latitude, longitude };
-
-    fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert("Dados enviados com sucesso!");
-        document.getElementById("Formulario").reset();
-    })
-    .catch(error => console.error("Erro ao enviar os dados:", error));
 });
