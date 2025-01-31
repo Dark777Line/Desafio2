@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');</style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');</style>
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="Icon-Titulo/mapa.ico" type="image/x-icon">
+    <title>Local Previse</title>
 </head>
 <body>
 
@@ -19,32 +20,32 @@
 
     <section>
         <header>
-            <div id= "Texto-Icone">
+            <div id="Texto-Icone">
                 <div id="Descricao-Principal-Icone">
-                Descubra Mais com Precisão:  <br> Previsões do Tempo e endereços <br> em tempo real.
+                    Descubra Mais com Precisão: <br> Previsões do Tempo e endereços <br> em tempo real.
                 </div>
-
-                <div  id="Icone-Nuvem">
-                <img src="Icones/nuvens.svg" alt="">
+                <div id="Icone-Nuvem">
+                    <img src="Icon-Svg/nuvens.svg" alt="">
                 </div>
             </div>
         </header>
 
+        <!-- Formulário atualizado -->
         <form id="Formulario">
             <div id="retangulo">
                 <div class="Grupo-Formulario">
-                    <label for="primeiro-nome">Nome:</label>
-                    <input type="text" placeholder="Insira seu primeiro nome:"required>
+                    <label for="nome">Nome:</label>
+                    <input id="nome" type="text" placeholder="Insira seu primeiro nome:" required>
                 </div>
 
                 <div class="Grupo-Formulario">    
-                    <label>E-mail:</label>
-                    <input type="email" placeholder="Insira seu e-mail"required>
+                    <label for="email">E-mail:</label>
+                    <input id="email" type="email" placeholder="Insira seu e-mail" required>
                 </div>    
 
                 <div class="Grupo-Formulario">
-                    <label>Digite o CEP:</label>
-                    <input id="inputCep" type="text" placeholder="Insira o CEP"require>
+                    <label for="inputCep">Digite o CEP:</label>
+                    <input id="inputCep" type="text" placeholder="Insira o CEP" required>
                 </div>
                 
                 <div class="Grupo-Formulario">
@@ -53,18 +54,15 @@
                         <input id="inputLatitude" type="text" placeholder="Insira a latitude" required>
                         <input id="inputLongitude" type="text" placeholder="Insira a longitude" required>
                     </div>
-                    
                 </div>
-                    
 
-                <button  type="button" onclick="getAddressByCep()">Acessar</button>
-                
+                <button type="submit">Acessar</button>
             </div>    
         </form>
 
         <div id="Buscas">
             <h2>Resultado da busca por CEP:</h2>
-            <img id="Alfinete" src="Icones/alfinete.svg" alt="">
+            <img id="Alfinete" src="Icon-Svg/alfinete.svg" alt="">
         </div>
 
         <table>
@@ -77,30 +75,29 @@
             </thead>
             <tbody class="Result">
                 <tr>
-                    <td><input id="cep" type="text" value="" readonly /></td>
-                    <td><input id="bairro" type="text" value="" readonly /></td>
-                    <td><input id="cidade" type="text" value="" readonly /></td>
+                    <td><input id="cep" type="text" value="" readonly></td>
+                    <td><input id="bairro" type="text" value="" readonly></td>
+                    <td><input id="cidade" type="text" value="" readonly></td>
                 </tr>
             </tbody>
         </table>
 
         <div id="Clima-Container">
             <div class="Clima-Previsao">
-              <h1>Previsão do tempo na região:</h1>
-              <img src="Icones/nuvens2.svg" alt="Nuvens" id="Nuvem-icon">
+                <h1>Previsão do tempo na região:</h1>
+                <img src="Icon-Svg/nuvens2.svg" alt="Nuvens" id="Nuvem-icon">
             </div>
             <div class="Clima-info">
-              <input id="clima" type="text" value="">
+                <input id="clima" type="text" value="" readonly>
             </div>
         </div>
 
     </section>
     
-    
     <div id="Temos-Politica">
         <p>Termos de Uso | Política de Privacidade</p>
     </div>
-</body>
 
-<script src="index.js"></script>
+    <script src="index.js"></script>
+</body>
 </html>

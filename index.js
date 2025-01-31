@@ -1,109 +1,112 @@
-async function getAddressByCep() {
-   // Obtém o valor do campo de entrada
-   const cep = document.getElementById('inputCep').value;
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("Formulario").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Impede o envio do formulário
 
-   // Valida o CEP
-   if (!cep || cep.length !== 8) {
-       alert('Por favor, insira um CEP válido com 8 dígitos.');
-       return;
-   }
-
-   try {
-       // Faz a requisição à API do ViaCEP
-       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-
-       // Verifica se a resposta foi bem-sucedida
-       if (!response.ok) {
-           throw new Error('Erro ao buscar o CEP. Verifique se o CEP está correto.');
-       }
-
-       // Converte a resposta em JSON
-       const data = await response.json();
-
-       // Verifica se houve erro na API
-       if (data.erro) {
-           alert('CEP não encontrado. Tente novamente.');
-           return;
-       }
-
-       // Preenche os campos de resultado
-       document.getElementById('cep').value = data.logradouro || '';
-       document.getElementById('bairro').value = data.bairro || '';
-       document.getElementById('cidade').value = `${data.localidade || ''} - ${data.uf || ''}`;
-   } catch (error) {
-       // Lida com erros de requisição ou processamento
-       console.error('Erro ao consumir a API:', error);
-       alert('Ocorreu um erro ao buscar o CEP. Tente novamente mais tarde.');
-   }
-
-     // Obtém os valores dos campos de latitude e longitude
-     const latitude = document.getElementById('inputLatitude').value;
-     const longitude = document.getElementById('inputLongitude').value;
- 
-     // Valida se latitude e longitude foram preenchidas
-     if (!latitude || !longitude) {
-         alert('Por favor, insira valores válidos para latitude e longitude.');
-         return;
-     }
- 
-     try {
-        // URL da API da Open Meteo com os parâmetros
-        const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m`;
-
-        // Faz a requisição à API
-        const response = await fetch(apiUrl);
-
-        // Verifica se a resposta foi bem-sucedida
-        if (!response.ok) {
-            throw new Error('Erro ao buscar a previsão do tempo. Verifique os valores de latitude e longitude.');
+        if (!validateForm()) {
+            return;
         }
 
-        // Converte a resposta em JSON
-        const data = await response.json();
+        // Obtém endereço pelo CEP
+        await getAddressByCep();
 
-        // Extrai as informações relevantes
-        const hourlyWeather = data.hourly;
-        const temperature = hourlyWeather.temperature_2m[0]; // Primeira previsão de temperatura
-        const humidity = hourlyWeather.relative_humidity_2m[0]; // Primeira previsão de umidade relativa
+        // Obtém a previsão do tempo
+        await getWeatherByCoordinates();
+    });
+});
 
-        // Exibe os resultados na página
-        document.getElementById('clima').value = `Temperatura: ${temperature}°C, Umidade: ${humidity}%`;
-    } catch (error) {
-        // Lida com erros de requisição ou processamento
-        console.error('Erro ao consumir a API:', error);
-        alert('Ocorreu um erro ao buscar a previsão do tempo. Tente novamente mais tarde.');
+function validateForm() {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const cep = document.getElementById('inputCep').value.trim();
+    const latitude = document.getElementById('inputLatitude').value.trim();
+    const longitude = document.getElementById('inputLongitude').value.trim();
+
+    if (!nome) {
+        alert('Por favor, insira seu nome.');
+        return false;
+    }
+    if (!email || !validateEmail(email)) {
+        alert('Por favor, insira um e-mail válido.');
+        return false;
+    }
+    if (!cep || cep.length !== 8 || isNaN(cep)) {
+        alert('Por favor, insira um CEP válido com 8 dígitos.');
+        return false;
+    }
+    if (!latitude || isNaN(latitude)) {
+        alert('Por favor, insira um valor numérico para a latitude.');
+        return false;
+    }
+    if (!longitude || isNaN(longitude)) {
+        alert('Por favor, insira um valor numérico para a longitude.');
+        return false;
     }
 
-    function validateForm(event) {
-        event.preventDefault(); // Impede o envio do formulário até que seja validado
+    return true;
+}
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+async function getAddressByCep() {
+    const cep = document.getElementById('inputCep').value.trim();
     
-        // Obtém os valores dos campos
-        const nome = document.getElementById('nome').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const cep = document.getElementById('inputCep').value.trim();
-        const latitude = document.getElementById('inputLatitude').value.trim();
-        const longitude = document.getElementById('inputLongitude').value.trim();
-    
-        // Verifica se os campos obrigatórios estão preenchidos
-        if (!nome) {
-            alert('Por favor, insira seu nome.');
-            return false;
+    if (!cep || cep.length !== 8 || isNaN(cep)) {
+        alert('Por favor, insira um CEP válido com 8 dígitos.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (!response.ok) throw new Error('Erro ao buscar o CEP.');
+
+        const data = await response.json();
+        if (data.erro) {
+            alert('CEP não encontrado. Tente novamente.');
+            return;
         }
-        if (!email) {
-            alert('Por favor, insira um e-mail válido.');
-            return false;
+
+        document.getElementById('cep').value = data.logradouro || '';
+        document.getElementById('bairro').value = data.bairro || '';
+        document.getElementById('cidade').value = `${data.localidade || ''} - ${data.uf || ''}`;
+
+    } catch (error) {
+        console.error('Erro ao consumir a API de CEP:', error);
+        alert('Erro ao buscar o CEP. Tente novamente mais tarde.');
+    }
+}
+
+async function getWeatherByCoordinates() {
+    const latitude = document.getElementById('inputLatitude').value.trim();
+    const longitude = document.getElementById('inputLongitude').value.trim();
+
+    if (!latitude || !longitude || isNaN(latitude) || isNaN(longitude)) {
+        alert('Por favor, insira valores válidos para latitude e longitude.');
+        return;
+    }
+
+    try {
+        const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m`;
+
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Erro ao buscar a previsão do tempo.');
+
+        const data = await response.json();
+
+        if (!data.hourly || !data.hourly.temperature_2m || !data.hourly.relative_humidity_2m) {
+            alert('Erro ao obter dados climáticos. Tente novamente.');
+            return;
         }
-        if (!cep || cep.length !== 8 || isNaN(cep)) {
-            alert('Por favor, insira um CEP válido com 8 dígitos.');
-            return false;
-        }
-        if (!latitude || isNaN(latitude)) {
-            alert('Por favor, insira um valor numérico para a latitude.');
-            return false;
-        }
-        if (!longitude || isNaN(longitude)) {
-            alert('Por favor, insira um valor numérico para a longitude.');
-            return false;
-        }
+
+        const temperature = data.hourly.temperature_2m[0]; // Primeira previsão de temperatura
+        const humidity = data.hourly.relative_humidity_2m[0]; // Primeira previsão de umidade relativa
+
+        document.getElementById('clima').value = `Temperatura: ${temperature}°C, Umidade: ${humidity}%`;
+        
+    } catch (error) {
+        console.error('Erro ao consumir a API de clima:', error);
+        alert('Erro ao buscar a previsão do tempo. Tente novamente mais tarde.');
     }
 }

@@ -1,93 +1,93 @@
 * {
-    margin: 0;
-    font-family: inter;
-  }
+  margin: 0;
+  font-family: inter;
+}
 
-  :root{
-    --BachGround-Copo: rgba(242, 242, 242, 1);
-  }
+:root {
+  --BachGround-Copo: rgba(242, 242, 242, 1);
+}
 
-  /* MENU INICIAL */
+/* MENU INICIAL */
 
-  #Principal {
-    background-color: rgba(12, 112, 242, 1);
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-  }
+#Principal {
+  background-color: rgba(12, 112, 242, 1);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
 
-  #menu{
-    display: flex;
-  }
+#menu {
+  display: flex;
+  justify-content: space-between; /* Mantém o espaçamento entre os itens */
+}
 
-  #Descricao-Primaria{
-    color: rgba(255, 255, 255, 1);
-    font-size: 56px;
-    width: 310px;
-    height: 61px;
-    top: 21px;
-    font-weight: bold;
-    margin-right: 780px;
-  }
+#Descricao-Primaria {
+  color: rgba(255, 255, 255, 1);
+  font-size: 56px;
+  width: 310px;
+  height: 61px;
+  top: 21px;
+  font-weight: bold;
+  margin-right: 780px;
+}
 
-  .Descricao-Segundaria {
-    color: rgba(255, 255, 255, 1);
-    font-size: 20px;
-    font-weight: 800;
-    font-weight: bold;
-    padding: 15px;
-    margin-top: 10px;
- 
-  }
+.Descricao-Segundaria {
+  color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-weight: 800;
+  font-weight: bold;
+  padding: 15px;
+  margin-top: 10px;
+}
 
-  /* DESCRIÇÃO E ICONE DO TEMPO */
+/* DESCRIÇÃO E ICONE DO TEMPO */
 
-  #Texto-Icone{
-    display: flex;
-    margin-top: 100px;
-    margin-bottom: 210px;
-  }
-  
-  #Descricao-Principal-Icone{
-    color: rgba(31, 31, 31, 1);
-    font-size: 50px;
-    font-weight: 710;
-    line-height: 60px;
-    text-align: left;
-    margin-left: 100px;
-    margin-top: 50px;
- }
+#Texto-Icone {
+  display: flex;
+  margin-top: 100px;
+  margin-bottom: 210px;
+}
 
- #Icone-Nuvem{
-    height: 200px;
-    margin-left: 100px;
- }
+#Descricao-Principal-Icone {
+  color: rgba(31, 31, 31, 1);
+  font-size: 50px;
+  font-weight: 710;
+  line-height: 60px;
+  text-align: left;
+  margin-left: 100px;
+  margin-top: 50px;
+}
 
- /* FORMULARIO E DESCRIÇÃO */
+#Icone-Nuvem {
+  height: 200px;
+  margin-left: 100px;
+}
 
- section{
+/* FORMULARIO E DESCRIÇÃO */
+
+section {
   display: flex;
   flex-direction: column;
   background-color: var(--BachGround-Copo);
   justify-content: center;
   align-items: center;
- }
+}
 
- .Grupo-Formulario{
+.Grupo-Formulario {
   display: flex;
   flex-direction: column;
   font-size: 20px;
   margin-bottom: 20px;
   line-height: 33px;
- }
+}
 
- label{
+label {
   color: #000000;
   margin-bottom: 20px;
   margin-left: 10px;
- }
+}
 
-.Grupo-Formulario  input{
+.Grupo-Formulario input {
   height: 10px;
   border-radius: 10px;
   background-color: #F2F2F2E5;
@@ -97,13 +97,13 @@
   padding: 20px;
 }
 
-#retangulo{
+#retangulo {
   background-color: #FFFFFF;
   padding: 50px;
-  border-radius:30px;
+  border-radius: 30px;
 }
 
-.Geolocalizacao{
+.Geolocalizacao {
   margin-inline: 10px;
   width: 200px;
 }
@@ -115,11 +115,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield; 
-  appearance: textfield; 
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
-button{
+button {
   background-color: #0C70F2E5;
   color: #FFFFFF;
   border-radius: 10px;
@@ -140,11 +140,11 @@ button:hover {
   outline: 2px solid #168bff;
   transform: scale(0.95);
   transition: transform 0.50s ease-out;
-}  
+}
 
 /* RESULTADO DE BUSCAS */
 
-#Buscas{
+#Buscas {
   display: flex;
   align-items: center;
   font-size: 30px;
@@ -154,11 +154,10 @@ button:hover {
   margin-top: 200px;
 }
 
-#Alfinete{
+#Alfinete {
   width: 120px;
   margin-left: 40px;
 }
-
 
 table {
   border-collapse: collapse;
@@ -183,7 +182,7 @@ td {
   text-align: center;
 }
 
-.Result input{
+.Result input {
   text-align: center;
   font-size: 23px;
   border: none;
@@ -208,9 +207,13 @@ td {
 }
 
 .Clima-Previsao h1 {
-  width: 700px;
+  width: auto; /* Permitir que o título ocupe o espaço conforme necessário */
+  max-width: 100%; /* Limitar a largura máxima */
   font-size: 35px;
   color: #1F1F1F;
+  margin: 0 auto;
+  text-align: center; /* Garantir que o texto esteja centralizado */
+  white-space: nowrap; /* Impede que o texto quebre */
 }
 
 #Nuvem-icon {
@@ -218,9 +221,7 @@ td {
   height: 70px;
 }
 
-
-
-.Clima-info input{
+.Clima-info input {
   width: 100%;
   margin-top: 5%;
   border-color: #007bff;
@@ -233,7 +234,7 @@ td {
 
 /* RODA PÉ INFO */
 
-#Temos-Politica{
+#Temos-Politica {
   text-align: end;
   font-size: 20px;
   padding: 30px;
@@ -241,4 +242,68 @@ td {
   color: #FFFFFF;
 }
 
+/* RESPONSIVIDADE - Ajuste de Tamanho de Texto */
+@media (max-width: 1024px) {
+  .Clima-Previsao h1 {
+      font-size: 28px; /* Reduz o tamanho da fonte em telas menores */
+  }
 
+  #Descricao-Primaria {
+      font-size: 48px; /* Ajuste do tamanho para telas médias */
+      margin-right: 500px; /* Ajusta a margem */
+  }
+}
+
+@media (max-width: 768px) {
+  .Clima-Previsao h1 {
+      font-size: 24px; /* Reduz ainda mais o tamanho em telas menores */
+  }
+
+  #Descricao-Primaria {
+      font-size: 38px; /* Ajuste para telas pequenas */
+      margin-right: 300px;
+  }
+
+  #menu {
+      flex-direction: column; /* Alinha os itens verticalmente */
+      align-items: center;
+  }
+
+  .Descricao-Segundaria {
+      margin-top: 10px;
+      font-size: 18px;
+  }
+
+  button {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .Clima-Previsao h1 {
+      font-size: 20px; /* Tamanho ajustado para telas muito pequenas */
+  }
+
+  #Descricao-Primaria {
+      font-size: 30px; /* Ajuste ainda mais o tamanho */
+      margin-right: 0;
+  }
+
+  .Grupo-Formulario input,
+  .Clima-info input {
+      font-size: 16px; /* Ajuste do tamanho das fontes em inputs */
+  }
+
+  button {
+      font-size: 18px;
+      width: 100%;
+  }
+
+  table {
+      width: 90%; /* Ajuste da largura da tabela */
+  }
+
+  #Buscas h2 {
+      font-size: 24px; /* Ajuste de tamanho para telas pequenas */
+  }
+}
