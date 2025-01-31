@@ -110,3 +110,27 @@ async function getWeatherByCoordinates() {
         alert('Erro ao buscar a previsão do tempo. Tente novamente mais tarde.');
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Seleciona todos os links internos do menu de navegação
+    const links = document.querySelectorAll("#menu a");
+
+    links.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // Previne a navegação padrão
+
+            const targetId = this.getAttribute("href").substring(1); // Obtém o ID do destino
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY;
+                
+                // Animação de rolagem suave
+                window.scrollTo({
+                    top: offsetTop - 50, // Ajuste para evitar sobreposição com cabeçalhos fixos
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});

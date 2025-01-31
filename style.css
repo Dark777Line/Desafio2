@@ -40,6 +40,12 @@
   margin-top: 10px;
 }
 
+a{
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
 /* DESCRIÇÃO E ICONE DO TEMPO */
 
 #Texto-Icone {
@@ -305,5 +311,97 @@ td {
 
   #Buscas h2 {
       font-size: 24px; /* Ajuste de tamanho para telas pequenas */
+  }
+}
+
+/* Rolagem suave ao navegar pelos links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Personalizando a barra de rolagem (para navegadores WebKit como Chrome e Edge) */
+::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra de rolagem */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #007bff; /* Cor da barra de rolagem */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Cor ao passar o mouse */
+}
+
+/* Transição suave para links */
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s; /* Adicionando transições suaves */
+}
+
+/* Efeito de destaque ao passar o mouse sobre o link */
+a:hover {
+  color: #67a8fc; /* Cor alterada para o link ao passar o mouse */
+  transform: scale(1.1); /* Pequeno aumento no tamanho do link */
+}
+
+/* Efeito visual ao clicar no link (foco) */
+a:active {
+  background-color: #004c8c; /* Cor de fundo ao clicar */
+  color: #FFFFFF; /* Mantém a cor do texto */
+  border-radius: 5px; /* Faz com que a borda seja arredondada */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra ao clicar */
+}
+
+/* Imagens gerais */
+img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de zoom ao passar o mouse */
+img:hover {
+  transform: scale(1.4); /* Aumenta levemente a imagem */
+}
+
+/* Efeito específico para #Icone-Nuvem */
+#Icone-Nuvem {
+  height: 200px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  animation: float 2s infinite ease-in-out;
+}
+
+#Icone-Nuvem:hover {
+  transform: scale(1.2) rotate(5deg); /* Aumenta e inclina levemente ao passar o mouse */
+}
+
+/* Efeito para #Alfinete */
+#Alfinete {
+  width: 120px;
+  margin-left: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#Alfinete:hover {
+  transform: scale(1.15) rotate(-5deg); /* Aumenta e inclina ao passar o mouse */
+  filter: brightness(1.2); /* Realça as cores */
+}
+
+/* Efeito de flutuação contínua para #Icone-Nuvem */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
