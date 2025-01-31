@@ -134,3 +134,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.getElementById("Formulario").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita recarregar a página
+
+    let nome = document.getElementById("nome").value;
+    let email = document.getElementById("email").value;
+    let cep = document.getElementById("inputCep").value;
+    let latitude = document.getElementById("inputLatitude").value;
+    let longitude = document.getElementById("inputLongitude").value;
+
+    // URL do Google Apps Script (Cole a URL que você copiou aqui)
+    let scriptURL = "https://script.google.com/macros/s/AKfycbxksKNEPVIanWlbkCqXok7L9g-1ALGrzD9ICzcyiQ6Sg0pkaJROu6E6YYv_8eJt-LA/exec";
+
+    let data = { nome, email, cep, latitude, longitude };
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert("Dados enviados com sucesso!");
+        document.getElementById("Formulario").reset();
+    })
+    .catch(error => console.error("Erro ao enviar os dados:", error));
+});
