@@ -113,37 +113,41 @@ async function sendDataToGoogleSheets() {
 }
 
 
-    function doPost(e) {
-        try {
-          // Verifique se os dados realmente chegaram no corpo da requisição
-          if (e && e.postData && e.postData.contents) {
-            var data = JSON.parse(e.postData.contents); // Converta os dados JSON em um objeto
+function doPost(e) {
+    try {
+      // Abra a planilha pelo ID
+      var sheet = SpreadsheetApp.openById("14SYPejGZ9O7Af9HxhUXml3P0TEPdg2L-ujYdtDImxVk")
+                                .getSheetByName("Pesquisas de endereço e previsão do tempo");
       
-            // Acesse os dados recebidos
-            var nome = data.Nome;
-            var email = data['E-mail'];
-            var cep = data.CEP;
-            var latitude = data.Latitude;
-            var longitude = data.Longitude;
-      
-            // Registre os dados na planilha
-            var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-            sheet.appendRow([nome, email, cep, latitude, longitude]);
-      
-            // Retorne uma resposta de sucesso
-            return ContentService.createTextOutput(
-              JSON.stringify({ "result": "success" })
-            ).setMimeType(ContentService.MimeType.JSON);
-          } else {
-            throw new Error("Dados não recebidos corretamente.");
-          }
-        } catch (error) {
-          // Caso ocorra um erro, envie uma mensagem de erro
-          return ContentService.createTextOutput(
-            JSON.stringify({ "result": "error", "message": error.message })
-          ).setMimeType(ContentService.MimeType.JSON);
+      // Verifique se os dados foram recebidos
+      if (e && e.postData && e.postData.contents) {
+        var data = JSON.parse(e.postData.contents); // Converte os dados JSON em um objeto
+        
+        // Verifique se todos os campos necessários estão presentes
+        if (data.nome && data.email && data.cep && data.latitude && data.longitude) {
+          // Adicione uma nova linha com os dados
+          sheet.appendRow([data.nome, data.email, data.cep, data.latitude, data.longitude]);
+          
+          // Retorne uma resposta de sucesso
+          return ContentService.createTextOutput("Sucesso")
+                               .setMimeType(ContentService.MimeType.TEXT);
+        } else {
+          // Se faltar algum dado, envie um erro
+          return ContentService.createTextOutput("Erro: Dados incompletos.")
+                               .setMimeType(ContentService.MimeType.TEXT);
         }
-      }      
+      } else {
+        // Se não houver dados, envie um erro
+        return ContentService.createTextOutput("Erro: Dados não recebidos.")
+                             .setMimeType(ContentService.MimeType.TEXT);
+      }
+    } catch (error) {
+      // Se ocorrer algum erro, envie a mensagem de erro
+      return ContentService.createTextOutput("Erro: " + error.message)
+                           .setMimeType(ContentService.MimeType.TEXT);
+    }
+  }
+   
       
 document.addEventListener("DOMContentLoaded", function () {
     // Seleciona todos os links internos do menu de navegação
