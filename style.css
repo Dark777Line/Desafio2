@@ -18,7 +18,7 @@
 
 #menu {
   display: flex;
-  justify-content: space-between; /* Mantém o espaçamento entre os itens */
+  justify-content: space-between;
 }
 
 #Descricao-Primaria {
@@ -331,7 +331,6 @@ html {
 
 ::-webkit-scrollbar-thumb {
     background: #007bff; /* Cor da barra de rolagem */
-    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
