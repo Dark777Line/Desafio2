@@ -10,6 +10,7 @@
 </head>
 <body>
 
+    <!-- Descrição de conteúdo -->
     <nav id="Principal">
         <div id="menu">
             <div id="Descricao-Primaria">DncWeather</div>
@@ -25,41 +26,42 @@
                     Descubra Mais com Precisão: <br> Previsões do Tempo e endereços <br> em tempo real.
                 </div>
                 <div id="Icone-Nuvem">
-                    <img src="Icon-Svg/nuvens.svg" alt="">
+                    <img src="Icon-Svg/nuvens.svg" alt="Nuvens">
                 </div>
             </div>
         </header>
 
-        <!-- Formulário atualizado -->
+        <!-- Formulário  -->
         <form id="Formulario">
             <div id="retangulo">
                 <div class="Grupo-Formulario">
                     <label for="nome">Nome:</label>
-                    <input id="nome" type="text" placeholder="Insira seu primeiro nome:" required>
+                    <input id="nome" name="Nome" type="text" placeholder="Insira seu primeiro nome:" required>
                 </div>
 
                 <div class="Grupo-Formulario">    
                     <label for="email">E-mail:</label>
-                    <input id="email" type="email" placeholder="Insira seu e-mail" required>
+                    <input id="email" name="E-mail" type="email" placeholder="Insira seu e-mail" required>
                 </div>    
 
                 <div class="Grupo-Formulario">
                     <label for="inputCep">Digite o CEP:</label>
-                    <input id="inputCep" type="text" placeholder="Insira o CEP" required>
+                    <input id="inputCep" name="CEP" type="text" placeholder="Insira o CEP" required>
                 </div>
                 
                 <div class="Grupo-Formulario">
                     <label id="Latitude-Previsao">Digite a latitude e longitude para saber a previsão:</label>
                     <div id="Box">
-                        <input id="inputLatitude" type="text" placeholder="Insira a latitude" required>
-                        <input id="inputLongitude" type="text" placeholder="Insira a longitude" required>
+                        <input id="inputLatitude" name="Latitude" type="text" placeholder="Insira a latitude" required>
+                        <input id="inputLongitude" name="Longitude" type="text" placeholder="Insira a longitude" required>
                     </div>
                 </div>
-
-                <button type="submit">Acessar</button>
+                
+                <button name="Created" type="submit">Acessar</button>
             </div>    
         </form>
 
+        <!-- Resultados de Busca  -->
         <div id="Buscas">
             <h2>Resultado da busca por CEP:</h2>
             <img id="Alfinete" src="Icon-Svg/alfinete.svg" alt="">
@@ -91,13 +93,14 @@
                 <input id="clima" type="text" value="" readonly>
             </div>
         </div>
-
     </section>
     
+    <!-- Rodapé  -->
     <div id="Temos-Politica">
         <p>Termos de Uso | Política de Privacidade</p>
     </div>
 
+    <!-- Script JS  -->
     <script src="index.js"></script>
 </body>
 </html>
